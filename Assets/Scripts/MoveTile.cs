@@ -9,78 +9,95 @@ using static UnityEditor.PlayerSettings;
 
 public class MoveTile : MonoBehaviour
 {
-    Tilemap map;
-    GridLayout gridLayout;
-    Vector3Int cellPosition;
-
     public Tile rootTile;
-    public Tile flowerTile;
+    public Tile stanTile;
+    public Tile limitTile;
 
-    public Vector2 pos;
-    public Vector2 mirrorPos;
+    public PlayerBehavior player;
+
+    private Tilemap map;
+    private GridLayout gridLayout;
+    private Vector3Int cellPosition;
+
+    private Vector2 rootPosition;
+    private Vector2 stanPosition;
 
     private void Start()
     {
         map = GetComponent<Tilemap>();
         gridLayout = transform.parent.GetComponentInParent<GridLayout>();
-        ChangeTile(rootTile, pos);
-        ChangeTile(flowerTile, mirrorPos);
-    }
-    private bool CheckOtherTile(Tile tile, Vector2 pos)
-    {
 
-        if (tile== map.GetTile<Tile>(gridLayout.WorldToCell(pos)))
+        ChangeTile(rootTile, rootPosition);
+        ChangeTile(stanTile, stanPosition);
+    }
+
+    private bool CheckTileCanSet(Tile tile, Vector2 pos)
+    {
+        Tile targetTile = map.GetTile<Tile>(gridLayout.WorldToCell(pos));
+        if (targetTile == tile || limitTile == tile)
             return false;
         else
             return true;
     }
+
     public void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(player.Key_Down))
         {
-            if (CheckOtherTile(rootTile, pos + Vector2.down))
+            if (CheckTileCanSet(rootTile, rootPosition + Vector2.down))
             {
-                mirrorPos += Vector2.up;
-                pos += Vector2.down;
+                stanPosition += Vector2.up;
+                rootPosition += Vector2.down;
                 
-                ChangeTile(rootTile, pos);
-                ChangeTile(flowerTile, mirrorPos);
+                ChangeTile(rootTile, rootPosition);
+                ChangeTile(stanTile, stanPosition);
+
+                MoveOnLiftMode(stanPosition + Vector2.down, stanPosition);
                 return;
             }
         }
-        if (Input.GetKeyDown(KeyCode.W))
+        else if (Input.GetKeyDown(player.Key_Up))
         {
-            if (CheckOtherTile(rootTile, pos + Vector2.up))
+            if (CheckTileCanSet(rootTile, rootPosition + Vector2.up))
             {
-                mirrorPos += Vector2.down;
-                pos += Vector2.up;
-                ChangeTile(rootTile, pos);
-                ChangeTile(flowerTile, mirrorPos);
+                stanPosition += Vector2.down;
+                rootPosition += Vector2.up;
+
+                ChangeTile(rootTile, rootPosition);
+                ChangeTile(stanTile, stanPosition);
+
+                MoveOnLiftMode(stanPosition + Vector2.up, stanPosition);
                 return;
             }
         }
-        if (Input.GetKeyDown(KeyCode.A))
+        else if (Input.GetKeyDown(player.Key_Left))
         {
-            if (CheckOtherTile(rootTile, pos + Vector2.left))
+            if (CheckTileCanSet(rootTile, rootPosition + Vector2.left))
             {
-                mirrorPos += Vector2.right;
-                pos += Vector2.left;
-                ChangeTile(rootTile, pos);
-                ChangeTile(flowerTile, mirrorPos);
+                stanPosition += Vector2.right;
+                rootPosition += Vector2.left;
+
+                ChangeTile(rootTile, rootPosition);
+                ChangeTile(stanTile, stanPosition);
+
+                MoveOnLiftMode(stanPosition + Vector2.right, stanPosition);
                 return;
             }
         }
-        if (Input.GetKeyDown(KeyCode.D))
+        else if (Input.GetKeyDown(player.Key_Right))
         {
-            if (CheckOtherTile(rootTile, pos + Vector2.right))
+            if (CheckTileCanSet(rootTile, rootPosition + Vector2.right))
             {
-                mirrorPos += Vector2.left;
-                pos += Vector2.right;
-                ChangeTile(rootTile, pos);
-                ChangeTile(flowerTile, mirrorPos);
+                stanPosition += Vector2.left;
+                rootPosition += Vector2.right;
+
+                ChangeTile(rootTile, rootPosition);
+                ChangeTile(stanTile, stanPosition);
+
+                MoveOnLiftMode(stanPosition + Vector2.left, stanPosition);
                 return;
             }
-        }
+        }       
     }
 
     private void ChangeTile(Tile tile, Vector2 point)
@@ -111,8 +128,17 @@ public class MoveTile : MonoBehaviour
                 if (transparentBox == null)
                     transparentBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 transparentBox.transform.position = startPosition;
+
+                player.transform.SetParent(transparentBox.transform);
+                player.transform.localPosition = Vector2.up;
             }
         }
+    }
+
+    private void MoveOnLiftMode(Vector2 start, Vector2 to)
+    {
+        if (liftMode)
+            StartCoroutine(MoveTransparentBox(start, to));
     }
 
     private IEnumerator MoveTransparentBox(Vector2 start, Vector2 to)
