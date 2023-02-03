@@ -21596,6 +21596,10 @@ PrefabInstance:
       value: -60000000
       objectReference: {fileID: 0}
     - target: {fileID: 7760353180360928936, guid: c85ae9e6639aac04eb497482ab6f4c45, type: 3}
+      propertyPath: m_Name
+      value: Platform
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760353180360928936, guid: c85ae9e6639aac04eb497482ab6f4c45, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -21615,7 +21619,7 @@ GameObject:
   - component: {fileID: 1623685393}
   - component: {fileID: 1623685399}
   m_Layer: 6
-  m_Name: Tilemap (1)
+  m_Name: Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -21652,8 +21656,17 @@ MonoBehaviour:
   stanTile: {fileID: 11400000, guid: 7660a6459dc01b54a91e1c0a63ea5cfd, type: 2}
   limitTile: {fileID: 11400000, guid: ad246e3f18d54b947b7f730b11423fb7, type: 2}
   player: {fileID: 2058715297}
+  map: {fileID: 0}
+  gridLayout: {fileID: 0}
+  cellPosition: {x: 0, y: 0, z: 0}
+  rootPosition: {x: 0, y: 0}
+  stanPosition: {x: 0, y: 0}
+  cam: {fileID: 0}
   startPosition: {x: 0, y: 0}
   liftSpeed: 1
+  transparentBox: {fileID: 0}
+  isMoving: 0
+  liftMode: 0
 --- !u!483693784 &1623685397
 TilemapRenderer:
   m_ObjectHideFlags: 0
