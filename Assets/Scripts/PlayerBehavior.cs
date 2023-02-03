@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using System;
+using UnityEngine.Events;
 
 public class PlayerBehavior : SerializedMonoBehaviour
 {
@@ -9,6 +11,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
     [SerializeField] private float MoveSpeed;
     [SerializeField] private float JumpPower;
+    [SerializeField] private float StepInterval = 0.5f;
 
     [Title("Raycasts")]
 
@@ -28,14 +31,19 @@ public class PlayerBehavior : SerializedMonoBehaviour
     public KeyCode Key_Plant;
     public KeyCode Key_ShiftControl;
 
+    [Title("Prefabs")]
+    public GameObject StepParticle;
+
     public enum ControlMode
     {
         Normal,
         Root
     }
 
-    public ControlMode currentControlmode;
-    public Rigidbody2D rbody;
+    [HideInInspector] public ControlMode currentControlmode;
+    [HideInInspector] public Rigidbody2D rbody;
+    [HideInInspector] public UnityAction OnPlant;
+    [HideInInspector] public UnityAction OnDeplant;
 
     private Animator anim;
 
@@ -43,29 +51,32 @@ public class PlayerBehavior : SerializedMonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
     }
 
     float moveLerpT = 0.25f;
+    float stepT = 0f;
 
     private void FixedUpdate()
     {
         anim.SetBool("Grounded", IsGrounded());
         anim.SetFloat("VertSpeed", rbody.velocity.y);
+        stepT -= Time.fixedDeltaTime;
 
         if (currentControlmode == ControlMode.Normal)
         {
-            if(Input.GetKey(Key_Right))
+            if (Input.GetKey(Key_Right))
             {
                 rbody.velocity = new Vector2(Mathf.Lerp(rbody.velocity.x, MoveSpeed, moveLerpT), rbody.velocity.y);
                 transform.right = Vector2.right;
                 anim.SetBool("HorInput", true);
+                TryStep();
             }
             else if(Input.GetKey(Key_Left))
             {
                 rbody.velocity = new Vector2(Mathf.Lerp(rbody.velocity.x, -MoveSpeed, moveLerpT), rbody.velocity.y);
                 transform.right = Vector2.left;
                 anim.SetBool("HorInput", true);
+                TryStep();
             }
         }
 
@@ -85,6 +96,19 @@ public class PlayerBehavior : SerializedMonoBehaviour
             {
                 rbody.velocity = new Vector2(rbody.velocity.x, JumpPower);
             }
+            if(Input.GetKeyDown(Key_Plant))
+            {
+                OnPlant.Invoke();
+                currentControlmode = ControlMode.Root;
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown(Key_Plant))
+            {
+                OnDeplant.Invoke();
+                currentControlmode = ControlMode.Normal;
+            }
         }
     }
 
@@ -100,4 +124,12 @@ public class PlayerBehavior : SerializedMonoBehaviour
         return footR || footL;
     }
 
+    private void TryStep()
+    {
+        if (stepT < 0f)
+        {
+            stepT = StepInterval;
+            Instantiate(StepParticle, RCO_FootL, true);
+        }
+    }
 }
