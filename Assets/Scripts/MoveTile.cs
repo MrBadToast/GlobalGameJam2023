@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Tilemaps;
 using static UnityEditor.PlayerSettings;
+using Cinemachine;
+using Unity.VisualScripting;
 
-
-
-public class MoveTile : MonoBehaviour
+public class Root : Unit
 {
     public Tile rootTile;
     public Tile stanTile;
@@ -22,6 +23,8 @@ public class MoveTile : MonoBehaviour
     private Vector2 rootPosition;
     private Vector2 stanPosition;
 
+    private CinemachineVirtualCamera cam;
+
     private void Start()
     {
         map = GetComponent<Tilemap>();
@@ -33,8 +36,25 @@ public class MoveTile : MonoBehaviour
         ChangeTile(rootTile, rootPosition);
         ChangeTile(stanTile, stanPosition);
 
-        player.OnShiftToRoot += () => { LiftMode = true; };
-        player.OnShiftToNormal += () => { LiftMode = false; };
+        cam = GetComponentInChildren<CinemachineVirtualCamera>();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.OnShiftToRoot = () => { LiftMode = true; };
+            player.OnShiftToNormal = () => { LiftMode = false; };
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
+            player.OnShiftToRoot = null;
+            player.OnShiftToNormal = null;
+        }
     }
 
     private bool CheckTileCanSet(Tile tile, Vector2 pos)
@@ -137,10 +157,13 @@ public class MoveTile : MonoBehaviour
 
                 player.transform.SetParent(transparentBox.transform);
                 player.transform.localPosition = Vector2.up;
+
+                cam.gameObject.SetActive(true);
             }
             else
             {
                 player.transform.SetParent(null);
+                cam.gameObject.SetActive(false);
             }
         }
     }
@@ -170,4 +193,5 @@ public class MoveTile : MonoBehaviour
         transparentBox.transform.position = to;
         isMoving = false;
     }
+
 }

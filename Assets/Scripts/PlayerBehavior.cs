@@ -5,7 +5,7 @@ using Sirenix.OdinInspector;
 using System;
 using UnityEngine.Events;
 
-public class PlayerBehavior : SerializedMonoBehaviour
+public class PlayerBehavior : Unit
 {
     [Title("Properties")]
 
@@ -34,11 +34,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
     [Title("Prefabs")]
     public GameObject StepParticle;
 
-    public enum ControlMode
-    {
-        Normal,
-        Root
-    }
+
 
     [HideInInspector] public ControlMode currentControlmode;
     [HideInInspector] public Rigidbody2D rbody;
