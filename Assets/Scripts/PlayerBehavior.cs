@@ -19,14 +19,14 @@ public class PlayerBehavior : SerializedMonoBehaviour
     
     [Title("Controls")]
 
-    [SerializeField] private KeyCode Key_Right;
-    [SerializeField] private KeyCode Key_Left;
-    [SerializeField] private KeyCode Key_Up;
-    [SerializeField] private KeyCode Key_Down;
+    public KeyCode Key_Right;
+    public KeyCode Key_Left;
+    public KeyCode Key_Up;
+    public KeyCode Key_Down;
 
-    [SerializeField] private KeyCode Key_Jump;
-    [SerializeField] private KeyCode Key_Plant;
-    [SerializeField] private KeyCode Key_ShiftControl;
+    public KeyCode Key_Jump;
+    public KeyCode Key_Plant;
+    public KeyCode Key_ShiftControl;
 
     public enum ControlMode
     {
@@ -34,38 +34,45 @@ public class PlayerBehavior : SerializedMonoBehaviour
         Root
     }
 
-    private ControlMode currentControlmode;
-    public ControlMode CurrentControlmode { get { return currentControlmode; } }
-
-
+    public ControlMode currentControlmode;
     public Rigidbody2D rbody;
+
+    private Animator anim;
 
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+
     }
 
     float moveLerpT = 0.25f;
 
     private void FixedUpdate()
     {
-        if(currentControlmode == ControlMode.Normal)
+        anim.SetBool("Grounded", IsGrounded());
+        anim.SetFloat("VertSpeed", rbody.velocity.y);
+
+        if (currentControlmode == ControlMode.Normal)
         {
             if(Input.GetKey(Key_Right))
             {
                 rbody.velocity = new Vector2(Mathf.Lerp(rbody.velocity.x, MoveSpeed, moveLerpT), rbody.velocity.y);
                 transform.right = Vector2.right;
+                anim.SetBool("HorInput", true);
             }
             else if(Input.GetKey(Key_Left))
             {
                 rbody.velocity = new Vector2(Mathf.Lerp(rbody.velocity.x, -MoveSpeed, moveLerpT), rbody.velocity.y);
                 transform.right = Vector2.left;
+                anim.SetBool("HorInput", true);
             }
         }
 
         if(!Input.GetKey(Key_Right)&&!Input.GetKey(Key_Left))
         {
             rbody.velocity = new Vector2(Vector2.Lerp(rbody.velocity, Vector2.zero, moveLerpT).x, rbody.velocity.y);
+            anim.SetBool("HorInput", false);
         }
         
     }
@@ -90,7 +97,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
         Debug.DrawRay(RCO_FootR.position, Vector3.down);
         Debug.DrawRay(RCO_FootL.position, Vector3.down);
 
-
         return footR || footL;
     }
+
 }
