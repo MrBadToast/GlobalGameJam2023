@@ -58,9 +58,16 @@ MonoBehaviour:
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: OnShiftToRoot
+      Entry: 6
+      Data: 
+    - Name: OnShiftToNormal
+      Entry: 6
+      Data: 
   MoveSpeed: 5
   JumpPower: 17
+  StepInterval: 0.5
   RCO_FootR: {fileID: 2005974562817405270}
   RCO_FootL: {fileID: 2005974563071317250}
   GroundedLength: 0.2
@@ -74,6 +81,8 @@ MonoBehaviour:
   Key_Jump: 32
   Key_Plant: 306
   Key_ShiftControl: 304
+  StepParticle: {fileID: 4731342780965461745, guid: 21eefa84761126b40811af5adb06e606, type: 3}
+  currentControlmode: 0
   rbody: {fileID: 0}
 --- !u!212 &2005974562663600862
 SpriteRenderer:

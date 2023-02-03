@@ -90,26 +90,29 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
     private void Update()
     {
-        if(currentControlmode == ControlMode.Normal)
+        if (currentControlmode == ControlMode.Normal)
         {
-            if(Input.GetKeyDown(Key_Jump) && IsGrounded())
+            if (Input.GetKeyDown(Key_Jump) && IsGrounded())
             {
                 rbody.velocity = new Vector2(rbody.velocity.x, JumpPower);
             }
-            if(Input.GetKeyDown(Key_ShiftControl))
+            if (Input.GetKeyDown(Key_ShiftControl))
             {
-                OnShiftToRoot.Invoke();
+                if (OnShiftToRoot != null)
+                    OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
-                rbody.isKinematic = true;
             }
         }
         else
         {
             if (Input.GetKeyDown(Key_ShiftControl))
             {
-                OnShiftToNormal.Invoke();
-                currentControlmode = ControlMode.Normal;
-                rbody.isKinematic = false;
+                if (!rbody.isKinematic)
+                {
+                    if (OnShiftToNormal != null)
+                        OnShiftToNormal.Invoke();
+                    currentControlmode = ControlMode.Normal;
+                }
             }
         }
     }
@@ -119,7 +122,6 @@ public class PlayerBehavior : SerializedMonoBehaviour
         bool footR = Physics2D.Raycast(RCO_FootR.position, Vector2.down, GroundedLength, groundLayer);
         bool footL = Physics2D.Raycast(RCO_FootL.position, Vector2.down, GroundedLength, groundLayer);
 
-        Debug.Log("FOOTR : " + footR + " / FOOTL : " + footL);
         Debug.DrawRay(RCO_FootR.position, Vector3.down);
         Debug.DrawRay(RCO_FootL.position, Vector3.down);
 
@@ -130,8 +132,10 @@ public class PlayerBehavior : SerializedMonoBehaviour
     {
         if (stepT < 0f)
         {
+            if (!IsGrounded()) return;
+
             stepT = StepInterval;
-            Instantiate(StepParticle, RCO_FootL, true);
+            Instantiate(StepParticle, RCO_FootL.position,Quaternion.Euler(0,0, UnityEngine.Random.Range(0.0f, 360f)));
         }
     }
 }
