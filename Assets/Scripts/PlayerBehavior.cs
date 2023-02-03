@@ -47,7 +47,10 @@ public class PlayerBehavior : SerializedMonoBehaviour
     [HideInInspector] public UnityAction OnShiftToRoot;
     [HideInInspector] public UnityAction OnShiftToNormal;
 
+    //rivate RootContoller currentControllingRoot;
+
     private Animator anim;
+
 
     private void Awake()
     {
@@ -109,19 +112,16 @@ public class PlayerBehavior : SerializedMonoBehaviour
         {
             if (Input.GetKeyDown(Key_ShiftControl))
             {
-                if (!rbody.isKinematic)
-                {
-                    if (OnShiftToNormal != null)
-                        OnShiftToNormal.Invoke();
-                    currentControlmode = ControlMode.Normal;
-                }
+                if (OnShiftToNormal != null)
+                    OnShiftToNormal.Invoke();
+                currentControlmode = ControlMode.Normal;
             }
         }
         if(currentControlmode == ControlMode.Root)
         {
             if (Input.GetKeyDown(Key_Up))
             {
-
+                
             }
             if (Input.GetKeyDown(Key_Right))
             {
@@ -162,8 +162,15 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
     private void TryCaptureSeed()
     {
-        RaycastHit2D rhit = Physics2D.CircleCast(transform.position, rootCaptureZone.radius, Vector2.down, rootCaptureZone.radius,rootLayer);
-        
+        RaycastHit2D rhit = Physics2D.CircleCast(transform.position, rootCaptureZone.radius, Vector2.down, rootCaptureZone.radius, rootLayer);
+        if (rhit)
+        {
+           currentControllingRoot = rhit.collider.GetComponent<RootContoller>();
+        }
+        else
+        {
+            currentControllingRoot = null;
+        }
     }
     
 }
