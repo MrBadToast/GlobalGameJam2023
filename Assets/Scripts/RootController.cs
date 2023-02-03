@@ -76,28 +76,28 @@ public class Root : MonoBehaviour
 
     public void PressRight()
     {
-        canInstall = contoller.IsTileCanInstall(contoller.root, rootPosition + Vector2.right);
+        canInstall = IsTileCanInstall(root, rootPosition + Vector2.right);
         if (!canInstall) 
             return;
 
         stemPosition += Vector2.left;
         rootPosition += Vector2.right;
 
-        contoller.ChangeTile(contoller.root, rootPosition);
-        contoller.ChangeTile(contoller.stem, stemPosition);
+        ChangeTile(root, rootPosition);
+        ChangeTile(stem, stemPosition);
     }
 
     public void PressLeft()
     {
-        canInstall = contoller.IsTileCanInstall(contoller.root, rootPosition + Vector2.left);
+        canInstall = IsTileCanInstall(root, rootPosition + Vector2.left);
         if (!canInstall) 
             return;
 
         stemPosition += Vector2.right;
         rootPosition += Vector2.left;
 
-        contoller.ChangeTile(contoller.root, rootPosition);
-        contoller.ChangeTile(contoller.stem, stemPosition);
+        ChangeTile(root, rootPosition);
+        ChangeTile(stem, stemPosition);
     }
 
     public void Reset()
