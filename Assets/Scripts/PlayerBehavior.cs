@@ -42,8 +42,8 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
     [HideInInspector] public ControlMode currentControlmode;
     [HideInInspector] public Rigidbody2D rbody;
-    [HideInInspector] public UnityAction OnPlant;
-    [HideInInspector] public UnityAction OnDeplant;
+    [HideInInspector] public UnityAction OnShiftToRoot;
+    [HideInInspector] public UnityAction OnShiftToNormal;
 
     private Animator anim;
 
@@ -96,17 +96,17 @@ public class PlayerBehavior : SerializedMonoBehaviour
             {
                 rbody.velocity = new Vector2(rbody.velocity.x, JumpPower);
             }
-            if(Input.GetKeyDown(Key_Plant))
+            if(Input.GetKeyDown(Key_ShiftControl))
             {
-                OnPlant.Invoke();
+                OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
             }
         }
         else
         {
-            if (Input.GetKeyDown(Key_Plant))
+            if (Input.GetKeyDown(Key_ShiftControl))
             {
-                OnDeplant.Invoke();
+                OnShiftToNormal.Invoke();
                 currentControlmode = ControlMode.Normal;
             }
         }
