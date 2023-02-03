@@ -38,7 +38,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
     public ControlMode CurrentControlmode { get { return currentControlmode; } }
 
 
-    private Rigidbody2D rbody;
+    public Rigidbody2D rbody;
 
     private void Awake()
     {

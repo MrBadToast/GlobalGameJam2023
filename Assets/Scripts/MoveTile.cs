@@ -16,14 +16,14 @@ public class MoveTile : MonoBehaviour
     public Tile rootTile;
     public Tile flowerTile;
 
-    private Vector2 pos = Vector2.zero;
-    private Vector2 mirrorPos = Vector2.up;
+    public Vector2 pos;
+    public Vector2 mirrorPos;
 
     private void Start()
     {
         map = GetComponent<Tilemap>();
         gridLayout = transform.parent.GetComponentInParent<GridLayout>();
-        ChangeTile(rootTile, Vector2.zero);
+        ChangeTile(rootTile, pos);
         ChangeTile(flowerTile, mirrorPos);
     }
     private bool CheckOtherTile(Tile tile, Vector2 pos)
@@ -84,10 +84,49 @@ public class MoveTile : MonoBehaviour
     }
 
     private void ChangeTile(Tile tile, Vector2 point)
-    {
-        
+    {        
         cellPosition = gridLayout.WorldToCell(point);
         Debug.Log(cellPosition);
         map.SetTile(cellPosition, tile);
+    }
+
+    public Vector2 startPosition;
+    public float liftSpeed;
+    private GameObject transparentBox = null;
+
+    private bool isMoving = false;
+
+    private bool liftMode = false;
+    public bool LiftMode 
+    {
+        get
+        {
+            return liftMode;
+        }
+        set
+        {
+            liftMode = value;
+            if (liftMode)
+            {
+                if (transparentBox == null)
+                    transparentBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                transparentBox.transform.position = startPosition;
+            }
+        }
+    }
+
+    private IEnumerator MoveTransparentBox(Vector2 start, Vector2 to)
+    {
+        isMoving = true;
+        float t = 0;
+        transparentBox.transform.position = start;
+        while (t < 1)
+        {
+            transparentBox.transform.position = Vector2.Lerp(start, to, t);
+            t += Time.deltaTime * liftSpeed;
+            yield return null;
+        }
+        transparentBox.transform.position = to;
+        isMoving = false;
     }
 }
