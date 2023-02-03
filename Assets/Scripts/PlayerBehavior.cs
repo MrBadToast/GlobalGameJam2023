@@ -100,6 +100,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
             {
                 OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
+                rbody.isKinematic = true;
             }
         }
         else
@@ -108,6 +109,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
             {
                 OnShiftToNormal.Invoke();
                 currentControlmode = ControlMode.Normal;
+                rbody.isKinematic = false;
             }
         }
     }

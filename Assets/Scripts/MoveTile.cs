@@ -27,8 +27,14 @@ public class MoveTile : MonoBehaviour
         map = GetComponent<Tilemap>();
         gridLayout = transform.parent.GetComponentInParent<GridLayout>();
 
+        rootPosition = startPosition;
+        stanPosition = startPosition;
+
         ChangeTile(rootTile, rootPosition);
         ChangeTile(stanTile, stanPosition);
+
+        player.OnShiftToRoot += () => { LiftMode = true; };
+        player.OnShiftToNormal += () => { LiftMode = false; };
     }
 
     private bool CheckTileCanSet(Tile tile, Vector2 pos)
@@ -80,7 +86,7 @@ public class MoveTile : MonoBehaviour
                 ChangeTile(rootTile, rootPosition);
                 ChangeTile(stanTile, stanPosition);
 
-                MoveOnLiftMode(stanPosition + Vector2.right, stanPosition);
+                MoveOnLiftMode(stanPosition + Vector2.left, stanPosition);
                 return;
             }
         }
@@ -94,7 +100,7 @@ public class MoveTile : MonoBehaviour
                 ChangeTile(rootTile, rootPosition);
                 ChangeTile(stanTile, stanPosition);
 
-                MoveOnLiftMode(stanPosition + Vector2.left, stanPosition);
+                MoveOnLiftMode(stanPosition + Vector2.right, stanPosition);
                 return;
             }
         }       
@@ -127,10 +133,14 @@ public class MoveTile : MonoBehaviour
             {
                 if (transparentBox == null)
                     transparentBox = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                transparentBox.transform.position = startPosition;
+                transparentBox.transform.position = startPosition + new Vector2(0.5f, 0.5f);
 
                 player.transform.SetParent(transparentBox.transform);
                 player.transform.localPosition = Vector2.up;
+            }
+            else
+            {
+                player.transform.SetParent(null);
             }
         }
     }
@@ -143,6 +153,11 @@ public class MoveTile : MonoBehaviour
 
     private IEnumerator MoveTransparentBox(Vector2 start, Vector2 to)
     {
+        start.x += 0.5f;
+        start.y += 0.5f;
+
+        to.x += 0.5f;
+        to.y += 0.5f;
         isMoving = true;
         float t = 0;
         transparentBox.transform.position = start;
