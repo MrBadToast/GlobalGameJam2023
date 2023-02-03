@@ -163,14 +163,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
     private void TryCaptureSeed()
     {
         RaycastHit2D rhit = Physics2D.CircleCast(transform.position, rootCaptureZone.radius, Vector2.down, rootCaptureZone.radius, rootLayer);
-        if (rhit)
-        {
-           currentControllingRoot = rhit.collider.GetComponent<RootContoller>();
-        }
-        else
-        {
-            currentControllingRoot = null;
-        }
+
     }
     
 }
