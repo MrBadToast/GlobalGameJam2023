@@ -19,6 +19,8 @@ public class PlayerBehavior : SerializedMonoBehaviour
     [SerializeField] Transform RCO_FootL;
     [SerializeField] float GroundedLength = 0.2f;
     [SerializeField] LayerMask groundLayer;
+    [SerializeField] CircleCollider2D rootCaptureZone;
+    [SerializeField] LayerMask rootLayer;
     
     [Title("Controls")]
 
@@ -115,6 +117,25 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 }
             }
         }
+        if(currentControlmode == ControlMode.Root)
+        {
+            if (Input.GetKeyDown(Key_Up))
+            {
+
+            }
+            if (Input.GetKeyDown(Key_Right))
+            {
+
+            }
+            if (Input.GetKeyDown(Key_Left))
+            {
+
+            }
+            if (Input.GetKeyDown(Key_Down))
+            {
+
+            }
+        }
     }
 
     public bool IsGrounded()
@@ -138,4 +159,11 @@ public class PlayerBehavior : SerializedMonoBehaviour
             Instantiate(StepParticle, RCO_FootL.position,Quaternion.Euler(0,0, UnityEngine.Random.Range(0.0f, 360f)));
         }
     }
+
+    private void TryCaptureSeed()
+    {
+        RaycastHit2D rhit = Physics2D.CircleCast(transform.position, rootCaptureZone.radius, Vector2.down, rootCaptureZone.radius,rootLayer);
+        
+    }
+    
 }
