@@ -12,96 +12,88 @@ using static UnityEditor.PlayerSettings;
 
 public class Root : MonoBehaviour
 {
+    public Tile seed;
+
     public Tile root;
     public Tile stem;
-    public Tile limit;
+    public List<Tile> obstacles = new List<Tile>();
 
-    public Vector2 startPosition;
-    public Vector2 rootPosition;
-    public Vector2 stemPosition;
+    public Vector2 startPosition = Vector2.zero;
+    public List<Vector2> rootPositions  = new List<Vector2>();
+    public List<Vector2> stemPositions  = new List<Vector2>();
 
     private bool canInstall = false;
 
     private Tilemap map;
     private GridLayout gridLayout;
-    private Vector3Int cellPosition;
+    private Vector3Int cellPosition = Vector3Int.zero;
+
+    public Transform childCam;
 
     private void Start()
     {
         map = GetComponent<Tilemap>();
         gridLayout = transform.parent.GetComponentInParent<GridLayout>();
+        ChangeTile(seed, startPosition);
+
+        rootPositions.Add(startPosition);
+        stemPositions.Add(startPosition);
     }
 
-    public bool IsTileCanInstall(Tile tile, Vector2 pos)
+    public bool IsTileCanInstall(Tile tile, Vector2 worldPos)
     {
-        Tile target = map.GetTile<Tile>(gridLayout.WorldToCell(pos));
-        if (tile == target || tile == limit)
-            return false;
-        else
-            return true;
+        Tile target = map.GetTile<Tile>(gridLayout.WorldToCell(worldPos));
+
+        if (target == root)
+            return false; // cannot path myself
+
+        foreach (var obstacle in obstacles)
+        {
+            if (target == obstacle)
+                return false; // cannot install new tile...!
+        }
+        return true;
     }
 
-    public void ChangeTile(Tile tile, Vector2 point)
+    public void ChangeTile(Tile tile, Vector2 worldPos)
     {
-        cellPosition = gridLayout.WorldToCell(point);
+        cellPosition = gridLayout.WorldToCell(worldPos);
         map.SetTile(cellPosition, tile);
     }
 
-    public void PressDown()
+    public void PressDown()     => Move(Vector2.down);
+
+    public void PressUp()       => Move(Vector2.up);
+
+    public void PressRight()    => Move(Vector2.right);
+
+    public void PressLeft()     => Move(Vector2.left);
+
+    private void Move(Vector2 direction)
     {
-        canInstall = IsTileCanInstall(root, rootPosition + Vector2.down);
-        if (!canInstall) 
+        Vector2 rootPosition = rootPositions[rootPositions.Count - 1] + direction;
+        Vector2 stemPosition = stemPositions[stemPositions.Count - 1] + direction * -1;
+
+        canInstall = IsTileCanInstall(root, rootPosition);
+        if (!canInstall)
             return;
 
-        stemPosition += Vector2.up; // reverse
-        rootPosition += Vector2.down;
-
-        // Change Tile
-        ChangeTile(root, rootPosition);
-        ChangeTile(stem, stemPosition);
-    }
-
-    public void PressUp()
-    {
-        canInstall = IsTileCanInstall(root, rootPosition + Vector2.up);
-        if (!canInstall) 
-            return;
-
-        stemPosition += Vector2.down; 
-        rootPosition += Vector2.up;
-
-        ChangeTile(root, rootPosition);
-        ChangeTile(stem, stemPosition);
-    }
-
-    public void PressRight()
-    {
-        canInstall = IsTileCanInstall(root, rootPosition + Vector2.right);
-        if (!canInstall) 
-            return;
-
-        stemPosition += Vector2.left;
-        rootPosition += Vector2.right;
+        stemPositions.Add(stemPosition);
+        rootPositions.Add(rootPosition);
 
         ChangeTile(root, rootPosition);
         ChangeTile(stem, stemPosition);
     }
 
-    public void PressLeft()
+    private void Undo()
     {
-        canInstall = IsTileCanInstall(root, rootPosition + Vector2.left);
-        if (!canInstall) 
-            return;
+        Vector2 rootPosition = rootPositions[rootPositions.Count - 1];
+        Vector2 stemPosition = stemPositions[stemPositions.Count - 1];
 
-        stemPosition += Vector2.right;
-        rootPosition += Vector2.left;
+        ChangeTile(null, rootPosition);
+        ChangeTile(null, stemPosition);
 
-        ChangeTile(root, rootPosition);
-        ChangeTile(stem, stemPosition);
-    }
-
-    public void Reset()
-    {
-       
+        stemPositions.RemoveAt(stemPositions.Count - 1);
+        rootPositions.RemoveAt(rootPositions.Count - 1);
     }
 }
