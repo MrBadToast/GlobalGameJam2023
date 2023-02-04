@@ -17,6 +17,7 @@ public class Root : MonoBehaviour
     public Tile root;
     public Tile stem;
     public List<Tile> obstacles = new List<Tile>();
+    
 
     private Vector2 startPosition = Vector2.zero;
     public List<Vector2> rootPositions  = new List<Vector2>();
@@ -28,19 +29,22 @@ public class Root : MonoBehaviour
     private Vector3Int cellPosition = Vector3Int.zero;
 
     public Transform childCam;
-    public Tilemap map;
-    public Tilemap obstacleMap;
+    public Tilemap rootMap;
+    public List<Tilemap> obstacleMaps = new List<Tilemap>();
 
     [SerializeField] private int maxLimitCount;
     private int limitCount;
     [SerializeField] TMPro.TextMeshProUGUI limitTmp;
+
+    [SerializeField] private GameObject rootEffect;
+    [SerializeField] private GameObject stemEffect;
 
     private void Start()
     {
         limitCount = maxLimitCount;
         startPosition = transform.position;
 
-        gridLayout = map.transform.parent.GetComponentInParent<GridLayout>();
+        gridLayout = rootMap.transform.parent.GetComponentInParent<GridLayout>();
         ChangeTile(seed, startPosition);
 
 
@@ -50,23 +54,31 @@ public class Root : MonoBehaviour
 
     public bool IsTileCanInstall(Tile tile, Vector2 worldPos)
     {
-        Tile target = obstacleMap.GetTile<Tile>(gridLayout.WorldToCell(worldPos));
 
-        if (target == root)
+        if (rootMap.GetTile<Tile>(gridLayout.WorldToCell(worldPos)) == tile)
             return false; // cannot path myself
 
-        foreach (var obstacle in obstacles)
+        foreach (var map in obstacleMaps)
         {
-            if (target == obstacle)
-                return false; // cannot install new tile...!
-        }
+            Tile target = map.GetTile<Tile>(gridLayout.WorldToCell(worldPos));
+
+            
+
+            foreach (var obstacle in obstacles)
+            {
+                if (target == obstacle)
+                    return false; // cannot install new tile...!
+            }
+        }        
         return true;
     }
 
     public void ChangeTile(Tile tile, Vector2 worldPos)
     {
         cellPosition = gridLayout.WorldToCell(worldPos);
-        map.SetTile(cellPosition, tile);
+        rootMap.SetTile(cellPosition, tile);
+
+        
     }
 
     public void PressDown()     => Move(Vector2.down);
@@ -100,7 +112,15 @@ public class Root : MonoBehaviour
         ChangeTile(root, rootPosition);
         ChangeTile(stem, stemPosition);
 
+        rootEffect.transform.position = gridLayout.WorldToCell(rootPosition ) + Vector3.one * 0.5f;
+        rootEffect.gameObject.SetActive(false);
+        rootEffect.gameObject.SetActive(true);
+        stemEffect.transform.position = gridLayout.WorldToCell(stemPosition) + Vector3.one * 0.5f;
+        stemEffect.gameObject.SetActive(false);
+        stemEffect.gameObject.SetActive(true);
         limitCount--;
+
+        limitTmp.text = "x " + limitCount.ToString();
     }
 
     private void Undo()
@@ -111,10 +131,15 @@ public class Root : MonoBehaviour
         ChangeTile(null, rootPosition);
         ChangeTile(null, stemPosition);
 
+        if (rootPositions.Count == 1 || stemPositions.Count == 1)
+            return;
+
         stemPositions.RemoveAt(stemPositions.Count - 1);
         rootPositions.RemoveAt(rootPositions.Count - 1);
 
         limitCount++;
+
+        limitTmp.text = "x " + limitCount.ToString();
     }
 
     private void ShowLimitUI(bool isOpen)
@@ -125,10 +150,10 @@ public class Root : MonoBehaviour
     }
 
     [SerializeField]private bool liftMode = false;
-    public bool LiftMode { get { return liftMode; } }
+    public bool LiftMode { get { return liftMode; } set { liftMode = value; } }
 
     public void RefreshPlayerPositionOnLiftMode(Transform playerPos)
     {
-        playerPos.position = stemPositions[stemPositions.Count - 1] + Vector2.up;
+        playerPos.position = stemPositions[stemPositions.Count - 1] + Vector2.up * 1.1f;
     }
 }
