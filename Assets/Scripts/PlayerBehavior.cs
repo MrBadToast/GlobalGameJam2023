@@ -56,6 +56,8 @@ public class PlayerBehavior : SerializedMonoBehaviour
     private Animator anim;
     private SimpleSoundModule soundModule;
 
+    public GameObject highlight;
+
 
     private void Awake()
     {
@@ -120,6 +122,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
                     OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
                 CurrentControllingRoot.OpenUI();
+                highlight.transform.position = CurrentControllingRoot.rootPositions[CurrentControllingRoot.rootPositions.Count - 1];
             }
         }
         else if (currentControlmode == ControlMode.Root)
@@ -132,7 +135,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 {
                     if (CurrentControllingRoot.LiftMode)
                     {
-                        CurrentControllingRoot.LiftMode = false;
+                        
                         CurrentControllingRoot.PressUp();
                     }
                     CurrentControllingRoot.PressUp();

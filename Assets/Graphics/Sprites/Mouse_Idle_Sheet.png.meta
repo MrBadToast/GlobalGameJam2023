@@ -844,7 +844,7 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Mouse_Idle_Sheet_3: 383558204
+      Mouse_Idle_Sheet_31: -1063814367
       Mouse_Idle_Sheet_0: -1801315871
       Mouse_Idle_Sheet_20: -1944478556
       Mouse_Idle_Sheet_19: 1265141547
@@ -876,7 +876,7 @@ TextureImporter:
       Mouse_Idle_Sheet_10: 201910738
       Mouse_Idle_Sheet_27: -1515949202
       Mouse_Idle_Sheet_26: 438179058
-      Mouse_Idle_Sheet_31: -1063814367
+      Mouse_Idle_Sheet_3: 383558204
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
