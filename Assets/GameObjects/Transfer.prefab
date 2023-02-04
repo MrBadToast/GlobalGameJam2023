@@ -7682,6 +7682,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2005974562663600859, guid: f1adaf6f3062db54b936b56072e10ec2, type: 3}
+      propertyPath: Key_Reset
+      value: 114
+      objectReference: {fileID: 0}
+    - target: {fileID: 2005974562663600859, guid: f1adaf6f3062db54b936b56072e10ec2, type: 3}
       propertyPath: serializationData.Prefab
       value: 
       objectReference: {fileID: 2005974562663600859, guid: f1adaf6f3062db54b936b56072e10ec2, type: 3}
