@@ -121,6 +121,14 @@ public class Root : MonoBehaviour
     {
 
             limitTmp.transform.parent.gameObject.SetActive(isOpen);
-        limitTmp.text = limitCount.ToString();
+        limitTmp.text = "x " + limitCount.ToString();
+    }
+
+    [SerializeField]private bool liftMode = false;
+    public bool LiftMode { get { return liftMode; } }
+
+    public void RefreshPlayerPositionOnLiftMode(Transform playerPos)
+    {
+        playerPos.position = stemPositions[stemPositions.Count - 1] + Vector2.up;
     }
 }

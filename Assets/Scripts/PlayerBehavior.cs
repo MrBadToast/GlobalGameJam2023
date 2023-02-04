@@ -111,7 +111,6 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 if (OnShiftToRoot != null)
                     OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
-
                 CurrentControllingRoot.OpenUI();
             }
         }
@@ -146,6 +145,11 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 if (Input.GetKeyDown(Key_ShiftControl))
                 {
                     CurrentControllingRoot.childCam.gameObject.SetActive(false);
+                }
+
+                if (CurrentControllingRoot.LiftMode)
+                {
+                    CurrentControllingRoot.RefreshPlayerPositionOnLiftMode(this.transform);
                 }
             }
 
@@ -204,7 +208,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
         {
             rhit.collider.TryGetComponent(out CurrentControllingRoot);
         }
-        else
+        else if (!rhit && currentControlmode == ControlMode.Normal)
         {
             CurrentControllingRoot = null;
         }
