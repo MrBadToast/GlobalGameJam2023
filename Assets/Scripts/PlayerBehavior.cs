@@ -50,12 +50,14 @@ public class PlayerBehavior : SerializedMonoBehaviour
     private Root CurrentControllingRoot;
 
     private Animator anim;
+    private SimpleSoundModule soundModule;
 
 
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        soundModule = GetComponent<SimpleSoundModule>();
     }
 
     float moveLerpT = 0.25f;
@@ -110,36 +112,35 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 currentControlmode = ControlMode.Root;
             }
         }
-        else
-        {
-            if (Input.GetKeyDown(Key_ShiftControl))
-            {
-                if (OnShiftToNormal != null)
-                    OnShiftToNormal.Invoke();
-                currentControlmode = ControlMode.Normal;
-            }
-        }
-        if(currentControlmode == ControlMode.Root)
+        else if(currentControlmode == ControlMode.Root)
         {
             if (CurrentControllingRoot)
             {
-                //camera action code here
+                CurrentControllingRoot.childCam.gameObject.SetActive(true);
 
                 if (Input.GetKeyDown(Key_Up))
                 {
-
+                    CurrentControllingRoot.PressUp();
                 }
                 if (Input.GetKeyDown(Key_Right))
                 {
-
+                    CurrentControllingRoot.PressRight();
                 }
                 if (Input.GetKeyDown(Key_Left))
                 {
-
+                    CurrentControllingRoot.PressLeft();
                 }
                 if (Input.GetKeyDown(Key_Down))
                 {
+                    CurrentControllingRoot.PressDown();
+                }
 
+                if (Input.GetKeyDown(Key_ShiftControl))
+                {
+                    if (OnShiftToNormal != null)
+                        OnShiftToNormal.Invoke();
+                    currentControlmode = ControlMode.Normal;
+                    CurrentControllingRoot.childCam.gameObject.SetActive(false);
                 }
             }
         }
@@ -164,6 +165,19 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
             stepT = StepInterval;
             Instantiate(StepParticle, RCO_FootL.position,Quaternion.Euler(0,0, UnityEngine.Random.Range(0.0f, 360f)));
+
+            var hit = Physics2D.Raycast(RCO_FootR.position, Vector2.down, GroundedLength, groundLayer);
+            if (hit)
+            {
+                if (hit.collider.gameObject.tag == "Grass")
+                {
+                    soundModule.Play("Walk_Grass");
+                }
+                else if (hit.collider.gameObject.tag == "Wood")
+                {
+                    soundModule.Play("Walk_Wood");
+                }
+            }
         }
     }
 
