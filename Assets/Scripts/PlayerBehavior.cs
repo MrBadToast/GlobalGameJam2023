@@ -32,6 +32,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
     public KeyCode Key_Jump;
     public KeyCode Key_Plant;
     public KeyCode Key_ShiftControl;
+    public KeyCode Key_RootUndo;
 
     [Title("Prefabs")]
     public GameObject StepParticle;
@@ -136,6 +137,11 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 {
                     CurrentControllingRoot.PressDown();
                 }
+                if (Input.GetKeyDown(Key_RootUndo))
+                {
+                    
+                }
+
 
                 if (Input.GetKeyDown(Key_ShiftControl))
                 {

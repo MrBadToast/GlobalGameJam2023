@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c9bb62e24616580489966712579e26c0
+guid: f30cee0efd1ee0645b213a23f0026b5e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 2
     mipBias: 0
     wrapU: 0
@@ -141,13 +141,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run_Dust_0
+      name: Stem_Grow_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,41 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a98e5e614f8562449972c1c1aec077bf
-      internalID: -1416212639
+      spriteID: 9ebc8cabeffa78240a71e928eb31748b
+      internalID: -1460390019
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_Dust_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce8ce657ea9752848be1e7ee3a8e7905
-      internalID: 131230665
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_Dust_2
+      name: Stem_Grow_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88ed5538112dc1e489f559cf0f6caa09
-      internalID: -1555021079
+      spriteID: 19d5551b6f8e2a047818153a960ec7b7
+      internalID: -1045740447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_Dust_3
+      name: Stem_Grow_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,8 +197,29 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2664f0927bfe58d4c961644fba7522e3
-      internalID: 1466861914
+      spriteID: 3b6fec1d3814b444ba37bca2120f8177
+      internalID: 2107666754
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Stem_Grow_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f51e1ee2e41605840b0cd7c5d1992a3d
+      internalID: -2007470296
       vertices: []
       indices: 
       edges: []
@@ -227,7 +227,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4958c59be603c4447b15270a8b98eda9
+    spriteID: 978bf7c85fe52a74ca8cfee6662bd4e7
     internalID: 0
     vertices: []
     indices: 
@@ -235,10 +235,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_Dust_2: -1555021079
-      Run_Dust_1: 131230665
-      Run_Dust_0: -1416212639
-      Run_Dust_3: 1466861914
+      Stem_Grow_1: -1045740447
+      Stem_Grow_2: 2107666754
+      Stem_Grow_0: -1460390019
+      Stem_Grow_3: -2007470296
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
