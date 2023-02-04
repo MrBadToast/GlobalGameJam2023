@@ -47,7 +47,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
     [HideInInspector] public UnityAction OnShiftToRoot;
     [HideInInspector] public UnityAction OnShiftToNormal;
 
-    //rivate RootContoller currentControllingRoot;
+    private Root CurrentControllingRoot;
 
     private Animator anim;
 
@@ -66,6 +66,8 @@ public class PlayerBehavior : SerializedMonoBehaviour
         anim.SetBool("Grounded", IsGrounded());
         anim.SetFloat("VertSpeed", rbody.velocity.y);
         stepT -= Time.fixedDeltaTime;
+
+        TryCaptureSeed();
 
         if (currentControlmode == ControlMode.Normal)
         {
@@ -119,21 +121,26 @@ public class PlayerBehavior : SerializedMonoBehaviour
         }
         if(currentControlmode == ControlMode.Root)
         {
-            if (Input.GetKeyDown(Key_Up))
+            if (CurrentControllingRoot)
             {
-                
-            }
-            if (Input.GetKeyDown(Key_Right))
-            {
+                //camera action code here
 
-            }
-            if (Input.GetKeyDown(Key_Left))
-            {
+                if (Input.GetKeyDown(Key_Up))
+                {
 
-            }
-            if (Input.GetKeyDown(Key_Down))
-            {
+                }
+                if (Input.GetKeyDown(Key_Right))
+                {
 
+                }
+                if (Input.GetKeyDown(Key_Left))
+                {
+
+                }
+                if (Input.GetKeyDown(Key_Down))
+                {
+
+                }
             }
         }
     }
@@ -163,7 +170,14 @@ public class PlayerBehavior : SerializedMonoBehaviour
     private void TryCaptureSeed()
     {
         RaycastHit2D rhit = Physics2D.CircleCast(transform.position, rootCaptureZone.radius, Vector2.down, rootCaptureZone.radius, rootLayer);
-
+        if(rhit)
+        {
+            rhit.collider.TryGetComponent(out CurrentControllingRoot);
+        }
+        else
+        {
+            CurrentControllingRoot = null;
+        }
     }
     
 }
