@@ -689,6 +689,18 @@ PrefabInstance:
       propertyPath: maxLimitCount
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.data[0]
+      value: 
+      objectReference: {fileID: 1723118185}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.data[1]
+      value: 
+      objectReference: {fileID: 1623685398}
     - target: {fileID: 3146063353292721749, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -1085,6 +1097,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
       propertyPath: obstacles.Array.data[0]
       value: 
       objectReference: {fileID: 11400000, guid: 52a29f297e565674483cfa51348d6044, type: 2}
@@ -1100,6 +1116,14 @@ PrefabInstance:
       propertyPath: obstacles.Array.data[3]
       value: 
       objectReference: {fileID: 11400000, guid: 52a29f297e565674483cfa51348d6044, type: 2}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.data[0]
+      value: 
+      objectReference: {fileID: 1723118185}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.data[1]
+      value: 
+      objectReference: {fileID: 1623685398}
     - target: {fileID: 3146063353292721749, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
       propertyPath: m_Color.b
       value: 1
@@ -33348,6 +33372,18 @@ PrefabInstance:
       propertyPath: obstacleMap
       value: 
       objectReference: {fileID: 1723118185}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.data[0]
+      value: 
+      objectReference: {fileID: 1723118185}
+    - target: {fileID: 3146063353292721739, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
+      propertyPath: obstacleMaps.Array.data[1]
+      value: 
+      objectReference: {fileID: 1623685398}
     - target: {fileID: 3146063353292721750, guid: 0773913ce33cfd24e87e88e56b2f1099, type: 3}
       propertyPath: m_RootOrder
       value: 2
