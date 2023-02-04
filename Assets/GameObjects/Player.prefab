@@ -67,7 +67,7 @@ GameObject:
   - component: {fileID: 1518025886}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -138,6 +138,7 @@ MonoBehaviour:
   Key_Plant: 306
   Key_ShiftControl: 304
   Key_RootUndo: 122
+  Key_Reset: 0
   StepParticle: {fileID: 4731342780965461745, guid: 21eefa84761126b40811af5adb06e606, type: 3}
   currentControlmode: 0
   rbody: {fileID: 0}

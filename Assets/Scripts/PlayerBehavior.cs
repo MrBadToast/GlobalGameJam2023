@@ -4,6 +4,7 @@ using UnityEngine;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehavior : SerializedMonoBehaviour
 {
@@ -33,6 +34,8 @@ public class PlayerBehavior : SerializedMonoBehaviour
     public KeyCode Key_Plant;
     public KeyCode Key_ShiftControl;
     public KeyCode Key_RootUndo;
+
+    public KeyCode Key_Reset;
 
     [Title("Prefabs")]
     public GameObject StepParticle;
@@ -100,6 +103,11 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
     private void Update()
     {
+        if(Input.GetKeyDown(Key_Reset))
+        {
+            SceneLoader.Instance.StartLoadingScene(SceneManager.GetActiveScene().name);
+        }
+
         if (currentControlmode == ControlMode.Normal)
         {
             if (Input.GetKeyDown(Key_Jump) && IsGrounded())
@@ -139,7 +147,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 }
                 if (Input.GetKeyDown(Key_RootUndo))
                 {
-                    
+                    CurrentControllingRoot.PressUndo();
                 }
 
 
