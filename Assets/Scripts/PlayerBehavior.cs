@@ -42,12 +42,12 @@ public class PlayerBehavior : SerializedMonoBehaviour
         Root
     }
 
-    [HideInInspector] public ControlMode currentControlmode;
+     public ControlMode currentControlmode;
     [HideInInspector] public Rigidbody2D rbody;
     [HideInInspector] public UnityAction OnShiftToRoot;
     [HideInInspector] public UnityAction OnShiftToNormal;
 
-    private Root CurrentControllingRoot;
+    public Root CurrentControllingRoot;
 
     private Animator anim;
     private SimpleSoundModule soundModule;
@@ -105,14 +105,14 @@ public class PlayerBehavior : SerializedMonoBehaviour
             {
                 rbody.velocity = new Vector2(rbody.velocity.x, JumpPower);
             }
-            if (Input.GetKeyDown(Key_ShiftControl))
+            if (Input.GetKeyDown(Key_ShiftControl) && CurrentControllingRoot)
             {
                 if (OnShiftToRoot != null)
                     OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
             }
         }
-        else if(currentControlmode == ControlMode.Root)
+        else if (currentControlmode == ControlMode.Root)
         {
             if (CurrentControllingRoot)
             {
@@ -137,13 +137,19 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
                 if (Input.GetKeyDown(Key_ShiftControl))
                 {
-                    if (OnShiftToNormal != null)
-                        OnShiftToNormal.Invoke();
-                    currentControlmode = ControlMode.Normal;
                     CurrentControllingRoot.childCam.gameObject.SetActive(false);
                 }
             }
-        }
+
+                if (Input.GetKeyDown(Key_ShiftControl))
+                {
+                    if (OnShiftToNormal != null)
+                        OnShiftToNormal.Invoke();
+
+                    currentControlmode = ControlMode.Normal;
+                }
+            }
+        
     }
 
     public bool IsGrounded()

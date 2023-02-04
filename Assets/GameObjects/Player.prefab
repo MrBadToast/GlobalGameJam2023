@@ -140,6 +140,7 @@ MonoBehaviour:
   StepParticle: {fileID: 4731342780965461745, guid: 21eefa84761126b40811af5adb06e606, type: 3}
   currentControlmode: 0
   rbody: {fileID: 0}
+  CurrentControllingRoot: {fileID: 0}
 --- !u!114 &1123759837904514038
 MonoBehaviour:
   m_ObjectHideFlags: 0
