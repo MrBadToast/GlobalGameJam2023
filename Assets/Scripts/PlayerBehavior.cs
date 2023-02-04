@@ -130,6 +130,11 @@ public class PlayerBehavior : SerializedMonoBehaviour
 
                 if (Input.GetKeyDown(Key_Up))
                 {
+                    if (CurrentControllingRoot.LiftMode)
+                    {
+                        CurrentControllingRoot.LiftMode = false;
+                        CurrentControllingRoot.PressUp();
+                    }
                     CurrentControllingRoot.PressUp();
                 }
                 if (Input.GetKeyDown(Key_Right))
@@ -142,7 +147,10 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 }
                 if (Input.GetKeyDown(Key_Down))
                 {
-                    CurrentControllingRoot.PressDown();
+  
+                        CurrentControllingRoot.PressDown();
+
+                    
                 }
                 if (Input.GetKeyDown(Key_RootUndo))
                 {
