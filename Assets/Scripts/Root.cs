@@ -18,22 +18,23 @@ public class Root : MonoBehaviour
     public Tile stem;
     public List<Tile> obstacles = new List<Tile>();
 
-    public Vector2 startPosition = Vector2.zero;
+    private Vector2 startPosition = Vector2.zero;
     public List<Vector2> rootPositions  = new List<Vector2>();
     public List<Vector2> stemPositions  = new List<Vector2>();
 
     private bool canInstall = false;
-
-    private Tilemap map;
+    
     private GridLayout gridLayout;
     private Vector3Int cellPosition = Vector3Int.zero;
 
     public Transform childCam;
+    public Tilemap map;
 
     private void Start()
     {
-        map = GetComponent<Tilemap>();
-        gridLayout = transform.parent.GetComponentInParent<GridLayout>();
+        startPosition = transform.position;
+
+        gridLayout = map.transform.parent.GetComponentInParent<GridLayout>();
         ChangeTile(seed, startPosition);
 
         rootPositions.Add(startPosition);
