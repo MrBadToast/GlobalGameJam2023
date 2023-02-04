@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3146063353292721750}
   - component: {fileID: 3146063353292721749}
-  - component: {fileID: 3146063353292721748}
   - component: {fileID: 3146063353292721739}
+  - component: {fileID: -1477740141723368339}
   m_Layer: 0
   m_Name: Root
   m_TagString: Untagged
@@ -87,19 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!135 &3146063353292721748
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3146063353292721738}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &3146063353292721739
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,6 +108,22 @@ MonoBehaviour:
   stemPositions: []
   childCam: {fileID: 3146063354691783681}
   map: {fileID: 0}
+--- !u!58 &-1477740141723368339
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3146063353292721738}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
 --- !u!1 &3146063353489599201
 GameObject:
   m_ObjectHideFlags: 0

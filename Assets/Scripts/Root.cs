@@ -29,6 +29,7 @@ public class Root : MonoBehaviour
 
     public Transform childCam;
     public Tilemap map;
+    public Tilemap obstacleMap;
 
     private void Start()
     {
@@ -43,7 +44,7 @@ public class Root : MonoBehaviour
 
     public bool IsTileCanInstall(Tile tile, Vector2 worldPos)
     {
-        Tile target = map.GetTile<Tile>(gridLayout.WorldToCell(worldPos));
+        Tile target = obstacleMap.GetTile<Tile>(gridLayout.WorldToCell(worldPos));
 
         if (target == root)
             return false; // cannot path myself
