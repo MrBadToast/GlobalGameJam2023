@@ -31,12 +31,18 @@ public class Root : MonoBehaviour
     public Tilemap map;
     public Tilemap obstacleMap;
 
+    [SerializeField] private int maxLimitCount;
+    private int limitCount;
+    [SerializeField] TMPro.TextMeshProUGUI limitTmp;
+
     private void Start()
     {
+        limitCount = maxLimitCount;
         startPosition = transform.position;
 
         gridLayout = map.transform.parent.GetComponentInParent<GridLayout>();
         ChangeTile(seed, startPosition);
+
 
         rootPositions.Add(startPosition);
         stemPositions.Add(startPosition);
@@ -71,8 +77,16 @@ public class Root : MonoBehaviour
 
     public void PressLeft()     => Move(Vector2.left);
 
+    public void PressUndo()     => Undo();
+
+    public void OpenUI() => ShowLimitUI(true);
+    public void CloseUI()=> ShowLimitUI(false);
+
     private void Move(Vector2 direction)
     {
+        if (limitCount <= 0)
+            return;
+
         Vector2 rootPosition = rootPositions[rootPositions.Count - 1] + direction;
         Vector2 stemPosition = stemPositions[stemPositions.Count - 1] + direction * -1;
 
@@ -85,6 +99,8 @@ public class Root : MonoBehaviour
 
         ChangeTile(root, rootPosition);
         ChangeTile(stem, stemPosition);
+
+        limitCount--;
     }
 
     private void Undo()
@@ -97,5 +113,14 @@ public class Root : MonoBehaviour
 
         stemPositions.RemoveAt(stemPositions.Count - 1);
         rootPositions.RemoveAt(rootPositions.Count - 1);
+
+        limitCount++;
+    }
+
+    private void ShowLimitUI(bool isOpen)
+    {
+
+            limitTmp.transform.parent.gameObject.SetActive(isOpen);
+        limitTmp.text = limitCount.ToString();
     }
 }

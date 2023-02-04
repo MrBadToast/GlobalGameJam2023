@@ -110,6 +110,8 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 if (OnShiftToRoot != null)
                     OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
+
+                CurrentControllingRoot.OpenUI();
             }
         }
         else if (currentControlmode == ControlMode.Root)
@@ -147,7 +149,9 @@ public class PlayerBehavior : SerializedMonoBehaviour
                         OnShiftToNormal.Invoke();
 
                     currentControlmode = ControlMode.Normal;
-                }
+
+                CurrentControllingRoot.CloseUI();
+            }
             }
         
     }
