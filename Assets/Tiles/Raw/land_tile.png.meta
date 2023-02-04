@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c9bb62e24616580489966712579e26c0
+guid: 8dea646b7f615e6499ff63d2257c5eab
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -51,7 +51,7 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
   textureType: 8
   textureShape: 1
@@ -141,7 +141,133 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run_Dust_0
+      name: land_tile_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 822ac8d7b0dfa9442a6517482003eb19
+      internalID: -1831514429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land_tile_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1153a36072f1f0942ad339d820c1af04
+      internalID: 567342930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land_tile_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b7a29a1f91b2e54780fa3970b1643e5
+      internalID: 1325971159
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land_tile_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2c2b5626bf2302498925a3936ea55a6
+      internalID: 851380716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land_tile_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 30338b311c4319c4d9bdc76c1c3b9106
+      internalID: -1588456362
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land_tile_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 840d5bb84d09cd24da74009c367e5cf6
+      internalID: 923228046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: land_tile_6
       rect:
         serializedVersion: 2
         x: 0
@@ -155,14 +281,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a98e5e614f8562449972c1c1aec077bf
-      internalID: -1416212639
+      spriteID: a23e8d33d95fba741a11aa3944f6cd4e
+      internalID: 1841012014
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_Dust_1
+      name: land_tile_7
       rect:
         serializedVersion: 2
         x: 32
@@ -176,14 +302,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ce8ce657ea9752848be1e7ee3a8e7905
-      internalID: 131230665
+      spriteID: 28834a12e5ec6ed4d929c566566f3ce7
+      internalID: 1294963888
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_Dust_2
+      name: land_tile_8
       rect:
         serializedVersion: 2
         x: 64
@@ -197,29 +323,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88ed5538112dc1e489f559cf0f6caa09
-      internalID: -1555021079
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_Dust_3
-      rect:
-        serializedVersion: 2
-        x: 96
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 2664f0927bfe58d4c961644fba7522e3
-      internalID: 1466861914
+      spriteID: 9207d2b0d7f4d824da9c7946709ba993
+      internalID: -649712730
       vertices: []
       indices: 
       edges: []
@@ -227,7 +332,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4958c59be603c4447b15270a8b98eda9
+    spriteID: 8e4df6937bff5df40b3121e6818abedb
     internalID: 0
     vertices: []
     indices: 
@@ -235,10 +340,15 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_Dust_2: -1555021079
-      Run_Dust_1: 131230665
-      Run_Dust_0: -1416212639
-      Run_Dust_3: 1466861914
+      land_tile_8: -649712730
+      land_tile_5: 923228046
+      land_tile_0: -1831514429
+      land_tile_3: 851380716
+      land_tile_1: 567342930
+      land_tile_7: 1294963888
+      land_tile_6: 1841012014
+      land_tile_4: -1588456362
+      land_tile_2: 1325971159
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

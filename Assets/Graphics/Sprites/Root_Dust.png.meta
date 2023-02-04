@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c9bb62e24616580489966712579e26c0
+guid: 4d6c5170235bce54ea40e41452ebff7c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -141,13 +141,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Run_Dust_0
+      name: Root_Dust_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -155,41 +155,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a98e5e614f8562449972c1c1aec077bf
-      internalID: -1416212639
+      spriteID: 43af5aa25fdc42744815e0f0a5319d68
+      internalID: -191016801
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_Dust_1
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ce8ce657ea9752848be1e7ee3a8e7905
-      internalID: 131230665
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Run_Dust_2
+      name: Root_Dust_1
       rect:
         serializedVersion: 2
         x: 64
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -197,20 +176,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 88ed5538112dc1e489f559cf0f6caa09
-      internalID: -1555021079
+      spriteID: 33d789ee889377a4d98d62be4c57c8c5
+      internalID: -547499662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Run_Dust_3
+      name: Root_Dust_2
       rect:
         serializedVersion: 2
-        x: 96
+        x: 128
         y: 0
-        width: 32
-        height: 32
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -218,8 +197,50 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2664f0927bfe58d4c961644fba7522e3
-      internalID: 1466861914
+      spriteID: f6b15f7578582a34295d34c3c98ced1c
+      internalID: 1378969746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Root_Dust_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 100765b91460ec44fb17dfcaad9595d8
+      internalID: 2087061469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Root_Dust_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ea4baf413770b8540afdc0239e95d2b8
+      internalID: 424412964
       vertices: []
       indices: 
       edges: []
@@ -227,7 +248,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 4958c59be603c4447b15270a8b98eda9
+    spriteID: 23063f6eb7be0c94590918176136b892
     internalID: 0
     vertices: []
     indices: 
@@ -235,10 +256,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Run_Dust_2: -1555021079
-      Run_Dust_1: 131230665
-      Run_Dust_0: -1416212639
-      Run_Dust_3: 1466861914
+      Root_Dust_4: 424412964
+      Root_Dust_1: -547499662
+      Root_Dust_0: -191016801
+      Root_Dust_2: 1378969746
+      Root_Dust_3: 2087061469
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
