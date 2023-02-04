@@ -9,6 +9,7 @@ using Cinemachine;
 using Unity.VisualScripting;
 
 using static UnityEditor.PlayerSettings;
+using UnityEditor;
 
 public class Root : MonoBehaviour
 {
@@ -38,7 +39,7 @@ public class Root : MonoBehaviour
 
     [SerializeField] private GameObject rootEffect;
     [SerializeField] private GameObject stemEffect;
-
+    public GameObject highlight;
     private void Start()
     {
         limitCount = maxLimitCount;
@@ -121,6 +122,8 @@ public class Root : MonoBehaviour
         limitCount--;
 
         limitTmp.text = "x " + limitCount.ToString();
+
+        highlight.transform.position = rootPositions[rootPositions.Count - 1];
     }
 
     private void Undo()

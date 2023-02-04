@@ -106,11 +106,17 @@ MonoBehaviour:
   stem: {fileID: 11400000, guid: 7af9f2be2ed2b5f4c9493a05b1dcf87b, type: 2}
   obstacles:
   - {fileID: 11400000, guid: 52a29f297e565674483cfa51348d6044, type: 2}
+  - {fileID: 11400000, guid: c0a84e037e58cc54a90c3c2df17f56ee, type: 2}
+  - {fileID: 11400000, guid: f454a646892a4334c8dd45ff24af35d4, type: 2}
+  - {fileID: 11400000, guid: 989773f769d75c44e8fce64742ad8dc2, type: 2}
+  - {fileID: 11400000, guid: 8c3598e4e14afc34282bb9290ad1412c, type: 2}
   rootPositions: []
   stemPositions: []
   childCam: {fileID: 3146063354691783681}
-  map: {fileID: 0}
-  obstacleMap: {fileID: 0}
+  rootMap: {fileID: 0}
+  obstacleMaps:
+  - {fileID: 0}
+  - {fileID: 0}
   maxLimitCount: 7
   limitTmp: {fileID: 0}
   rootEffect: {fileID: 8334471088277617354}
