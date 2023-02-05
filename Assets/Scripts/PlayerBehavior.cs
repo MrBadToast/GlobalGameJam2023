@@ -56,7 +56,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
     private Animator anim;
     private SimpleSoundModule soundModule;
 
-    public GameObject highlight;
+    //public GameObject highlight;
 
 
     private void Awake()
@@ -108,6 +108,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
         if(Input.GetKeyDown(Key_Reset))
         {
             SceneLoader.Instance.StartLoadingScene(SceneManager.GetActiveScene().name);
+            soundModule.Play("Reset");
         }
 
         if (currentControlmode == ControlMode.Normal)
@@ -115,6 +116,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
             if (Input.GetKeyDown(Key_Jump) && IsGrounded())
             {
                 rbody.velocity = new Vector2(rbody.velocity.x, JumpPower);
+                soundModule.Play("Jump");
             }
             if (Input.GetKeyDown(Key_ShiftControl) && CurrentControllingRoot)
             {
@@ -122,7 +124,7 @@ public class PlayerBehavior : SerializedMonoBehaviour
                     OnShiftToRoot.Invoke();
                 currentControlmode = ControlMode.Root;
                 CurrentControllingRoot.OpenUI();
-                highlight.transform.position = CurrentControllingRoot.rootPositions[CurrentControllingRoot.rootPositions.Count - 1];
+             
             }
         }
         else if (currentControlmode == ControlMode.Root)
@@ -135,25 +137,25 @@ public class PlayerBehavior : SerializedMonoBehaviour
                 {
                     if (CurrentControllingRoot.LiftMode)
                     {
-                        
-                        CurrentControllingRoot.PressUp();
+
+                        if (CurrentControllingRoot.PressUp()) soundModule.Play("StemGrow");
                     }
-                    CurrentControllingRoot.PressUp();
+                    if (CurrentControllingRoot.PressUp()) soundModule.Play("StemGrow");
                 }
                 if (Input.GetKeyDown(Key_Right))
                 {
-                    CurrentControllingRoot.PressRight();
+                    if(CurrentControllingRoot.PressRight()) soundModule.Play("StemGrow");
                 }
                 if (Input.GetKeyDown(Key_Left))
                 {
-                    CurrentControllingRoot.PressLeft();
+                    if(CurrentControllingRoot.PressLeft()) soundModule.Play("StemGrow");
                 }
                 if (Input.GetKeyDown(Key_Down))
                 {
   
-                        CurrentControllingRoot.PressDown();
+                       if( CurrentControllingRoot.PressDown()) soundModule.Play("StemGrow");
 
-                    
+
                 }
                 if (Input.GetKeyDown(Key_RootUndo))
                 {

@@ -8,7 +8,7 @@ using UnityEngine.Tilemaps;
 using Cinemachine;
 using Unity.VisualScripting;
 
-using static UnityEditor.PlayerSettings;
+//using static UnityEditor.PlayerSettings;
 using UnityEditor;
 
 public class Root : MonoBehaviour
@@ -18,7 +18,6 @@ public class Root : MonoBehaviour
     public Tile root;
     public Tile stem;
     public List<Tile> obstacles = new List<Tile>();
-    
 
     private Vector2 startPosition = Vector2.zero;
     public List<Vector2> rootPositions  = new List<Vector2>();
@@ -82,30 +81,30 @@ public class Root : MonoBehaviour
         
     }
 
-    public void PressDown()     => Move(Vector2.down);
+    public bool PressDown()     => Move(Vector2.down);
 
-    public void PressUp()       => Move(Vector2.up);
+    public bool PressUp()       => Move(Vector2.up);
 
-    public void PressRight()    => Move(Vector2.right);
+    public bool PressRight()    => Move(Vector2.right);
 
-    public void PressLeft()     => Move(Vector2.left);
+    public bool PressLeft()     => Move(Vector2.left);
 
     public void PressUndo()     => Undo();
 
     public void OpenUI() => ShowLimitUI(true);
     public void CloseUI()=> ShowLimitUI(false);
 
-    private void Move(Vector2 direction)
+    private bool Move(Vector2 direction)
     {
         if (limitCount <= 0)
-            return;
+            return false;
 
         Vector2 rootPosition = rootPositions[rootPositions.Count - 1] + direction;
         Vector2 stemPosition = stemPositions[stemPositions.Count - 1] + direction * -1;
 
         canInstall = IsTileCanInstall(root, rootPosition);
         if (!canInstall)
-            return;
+            return false;
 
         stemPositions.Add(stemPosition);
         rootPositions.Add(rootPosition);
@@ -124,6 +123,8 @@ public class Root : MonoBehaviour
         limitTmp.text = "x " + limitCount.ToString();
 
         highlight.transform.position = rootPositions[rootPositions.Count - 1];
+
+        return true;
     }
 
     private void Undo()
@@ -143,6 +144,8 @@ public class Root : MonoBehaviour
         limitCount++;
 
         limitTmp.text = "x " + limitCount.ToString();
+
+        highlight.transform.position = rootPositions[rootPositions.Count - 1];
     }
 
     private void ShowLimitUI(bool isOpen)

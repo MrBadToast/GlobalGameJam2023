@@ -121,6 +121,7 @@ MonoBehaviour:
   limitTmp: {fileID: 0}
   rootEffect: {fileID: 8334471088277617354}
   stemEffect: {fileID: 6917452346223459957}
+  highlight: {fileID: 0}
   liftMode: 1
 --- !u!58 &-1477740141723368339
 CircleCollider2D:
@@ -236,7 +237,7 @@ MonoBehaviour:
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
-    FieldOfView: 100
+    FieldOfView: 130
     OrthographicSize: 5
     NearClipPlane: 0.3
     FarClipPlane: 1000
